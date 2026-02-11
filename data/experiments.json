@@ -1,0 +1,70 @@
+{
+  "experiments": [
+    {
+      "id": "crewReport",
+      "name": "Crew Report",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    },
+    {
+      "id": "evaReport",
+      "name": "EVA Report",
+      "requires_biome": true,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    },
+    {
+      "id": "surfaceSample",
+      "name": "Surface Sample",
+      "requires_biome": true,
+      "situations": ["SrfLanded", "SrfSplashed"]
+    },
+    {
+      "id": "temperatureScan",
+      "name": "Temperature Scan",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    },
+    {
+      "id": "barometerScan",
+      "name": "Barometer Scan",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh"]
+    },
+    {
+      "id": "seismicScan",
+      "name": "Seismic Scan",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed"]
+    },
+    {
+      "id": "gravityScan",
+      "name": "Gravity Scan",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    },
+    {
+      "id": "atmosphereAnalysis",
+      "name": "Atmosphere Analysis",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh"]
+    },
+    {
+      "id": "asteroidSample",
+      "name": "Asteroid Sample",
+      "requires_biome": false,
+      "situations": ["InSpaceLow"]
+    },
+    {
+      "id": "mysteryGoo",
+      "name": "Mystery Goo Observation",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    },
+    {
+      "id": "mobileMaterialsLab",
+      "name": "Materials Study",
+      "requires_biome": false,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"]
+    }
+  ]
+}

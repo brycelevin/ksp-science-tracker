@@ -1,0 +1,170 @@
+{
+  "bodies": [
+    {
+      "name": "Kerbin",
+      "has_atmosphere": true,
+      "has_ocean": true,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Grasslands", "Highlands", "Mountains", "Deserts", "Badlands",
+        "Tundra", "IceCaps", "Shores", "Water", "KSC"
+      ]
+    },
+    {
+      "name": "Mun",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Midlands", "MidlandCraters", "NorthwestCrater", "EastCrater",
+        "SouthwestCrater", "Highlands", "HighlandCraters", "Canyons",
+        "FarsideBasin", "EastFarsideCrater", "NortheastBasin",
+        "NorthwestCrater", "Poles", "PolarCrater", "PolarLowlands"
+      ]
+    },
+    {
+      "name": "Minmus",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Flats", "LesserFlats", "GreaterFlats", "Lowlands",
+        "Midlands", "Highlands", "Slopes", "Poles"
+      ]
+    },
+    {
+      "name": "Moho",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "MinorCraters",
+        "CentralLowlands", "NorthPole", "SouthPole", "Canyon"
+      ]
+    },
+    {
+      "name": "Eve",
+      "has_atmosphere": true,
+      "has_ocean": true,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "Mountains", "Foothills",
+        "Peaks", "CraterLake", "Shallows", "Explodium", "ImpactEjecta",
+        "Crater", "Olympus", "WesternSea", "EasternSea"
+      ]
+    },
+    {
+      "name": "Gilly",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands"
+      ]
+    },
+    {
+      "name": "Duna",
+      "has_atmosphere": true,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "Craters", "Poles",
+        "PolarHighlands", "PolarCraters", "Canyons", "MidlandCanyon",
+        "HighlandCraters", "MidlandCraters"
+      ]
+    },
+    {
+      "name": "Ike",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "EasternMountainRidge",
+        "WesternMountainRidge", "CentralMountainRange", "SouthPole",
+        "SouthEasternMountainRange"
+      ]
+    },
+    {
+      "name": "Dres",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "Canyons", "Poles",
+        "Ridges", "ImpactCraters", "ImpactEjecta"
+      ]
+    },
+    {
+      "name": "Jool",
+      "has_atmosphere": true,
+      "has_ocean": false,
+      "situations": ["FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"],
+      "biomes": []
+    },
+    {
+      "name": "Laythe",
+      "has_atmosphere": true,
+      "has_ocean": true,
+      "situations": ["SrfLanded", "SrfSplashed", "FlyingLow", "FlyingHigh", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Shores", "Dunes", "TheDeep", "TheSlab", "Peaks", "Crater",
+        "CraterBay", "CraterIsland"
+      ]
+    },
+    {
+      "name": "Vall",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "Mountains", "NorthwestCrater",
+        "NortheastCrater", "SoutheastCrater", "SouthPole"
+      ]
+    },
+    {
+      "name": "Tylo",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "MinorCraters", "MajorCraters",
+        "Mara", "Galileo"
+      ]
+    },
+    {
+      "name": "Bop",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Slopes", "Valley", "Peaks", "Ridges"
+      ]
+    },
+    {
+      "name": "Pol",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "Peaks"
+      ]
+    },
+    {
+      "name": "Eeloo",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["SrfLanded", "InSpaceLow", "InSpaceHigh"],
+      "biomes": [
+        "Lowlands", "Midlands", "Highlands", "IceCanyons", "Craters",
+        "NorthernGlaciers", "SouthernGlaciers", "Poles", "Fragipan", "Babbage", "Mu"
+      ]
+    },
+    {
+      "name": "Sun",
+      "has_atmosphere": false,
+      "has_ocean": false,
+      "situations": ["InSpaceLow", "InSpaceHigh"],
+      "biomes": []
+    }
+  ]
+}
