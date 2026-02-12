@@ -166,6 +166,10 @@ class MainWindow:
 
     def _update_display(self):
         """Update experiment tree based on current filters."""
+        # Check if UI components are initialized (may not be during startup)
+        if not hasattr(self, 'filter_panel') or not hasattr(self, 'experiment_tree'):
+            return
+
         if not self.available_experiments:
             self.experiment_tree.clear()
             self.stats_label.config(text="No available experiments found!")

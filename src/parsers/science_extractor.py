@@ -74,7 +74,7 @@ class ScienceExtractor:
             science_node: Dictionary containing science data
 
         Returns:
-            CompletedExperiment object
+            CompletedExperiment object, or None if entry should be skipped
 
         Raises:
             ValueError: If node is invalid or cannot be parsed
@@ -83,6 +83,11 @@ class ScienceExtractor:
         ksp_id = science_node.get('id')
         if not ksp_id:
             raise ValueError("Science node missing 'id' field")
+
+        # Skip special milestone/achievement entries (not regular experiments)
+        # These include "recovery" (vessel recovery milestones) and similar non-repeatable events
+        if ksp_id.startswith('recovery@'):
+            return None
 
         # Parse science values (may be strings or floats)
         try:
