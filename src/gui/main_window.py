@@ -64,28 +64,9 @@ class MainWindow:
         main_container = ttk.Frame(self.root)
         main_container.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-        # Save selector at top
-        self.save_selector = SaveSelector(main_container, self._on_save_selected)
-        self.save_selector.pack(fill=tk.X)
-
-        # Filter panel
-        self.filter_panel = FilterPanel(
-            main_container,
-            self.science_db,
-            self._on_filter_changed
-        )
-        self.filter_panel.pack(fill=tk.X)
-
-        # Experiment tree (main display area)
-        tree_frame = ttk.LabelFrame(main_container, text="Available Experiments", padding=5)
-        tree_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-
-        self.experiment_tree = ExperimentTree(tree_frame, self.science_db)
-        self.experiment_tree.pack(fill=tk.BOTH, expand=True)
-
-        # Statistics bar at bottom
+        # Statistics bar at bottom (created first so it exists for callbacks)
         stats_frame = ttk.Frame(main_container)
-        stats_frame.pack(fill=tk.X, pady=5)
+        stats_frame.pack(fill=tk.X, pady=5, side=tk.BOTTOM)
 
         self.stats_label = ttk.Label(
             stats_frame,
@@ -93,6 +74,25 @@ class MainWindow:
             font=("TkDefaultFont", 10, "bold")
         )
         self.stats_label.pack()
+
+        # Save selector at top
+        self.save_selector = SaveSelector(main_container, self._on_save_selected)
+        self.save_selector.pack(fill=tk.X, side=tk.TOP)
+
+        # Filter panel
+        self.filter_panel = FilterPanel(
+            main_container,
+            self.science_db,
+            self._on_filter_changed
+        )
+        self.filter_panel.pack(fill=tk.X, side=tk.TOP)
+
+        # Experiment tree (main display area)
+        tree_frame = ttk.LabelFrame(main_container, text="Available Experiments", padding=5)
+        tree_frame.pack(fill=tk.BOTH, expand=True, pady=5, side=tk.TOP)
+
+        self.experiment_tree = ExperimentTree(tree_frame, self.science_db)
+        self.experiment_tree.pack(fill=tk.BOTH, expand=True)
 
     def _show_welcome(self):
         """Show welcome message in tree view."""

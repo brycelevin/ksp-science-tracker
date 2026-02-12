@@ -84,8 +84,7 @@ class SFSParser:
             raise FileNotFoundError(f"Save file not found: {save_path}")
 
         try:
-            with open(save_path, 'r', encoding='utf-8') as f:
-                save_data = sfsutils.parse_savefile(f)
+            save_data = sfsutils.parse_savefile(str(save_path))
             return save_data
         except Exception as e:
             raise ValueError(f"Failed to parse save file: {e}")
