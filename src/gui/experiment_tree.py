@@ -101,30 +101,40 @@ class ExperimentTree(ttk.Frame):
 
         # Build tree
         for body in sorted(body_groups.keys()):
-            body_total = sum(
-                exp.available_science
+            # Calculate totals for body level
+            all_body_exps = [
+                exp
                 for situation in body_groups[body].values()
                 for biome in situation.values()
                 for exp in biome
-            )
+            ]
+            body_total = sum(exp.available_science for exp in all_body_exps)
+            body_completed = sum(1 for exp in all_body_exps if exp.available_science <= 0.1)
+            body_status = self._get_category_status(body_total, len(all_body_exps), body_completed)
 
             body_node = self.tree.insert(
                 "", "end",
-                text=f"☐ {body}",
+                text=f"{body_status} {body}",
                 values=(f"{body_total:.1f}",),
                 open=False
             )
 
             for situation in sorted(body_groups[body].keys()):
-                situation_total = sum(
-                    exp.available_science
+                # Calculate totals for situation level
+                all_situation_exps = [
+                    exp
                     for biome in body_groups[body][situation].values()
                     for exp in biome
+                ]
+                situation_total = sum(exp.available_science for exp in all_situation_exps)
+                situation_completed = sum(1 for exp in all_situation_exps if exp.available_science <= 0.1)
+                situation_status = self._get_category_status(
+                    situation_total, len(all_situation_exps), situation_completed
                 )
 
                 situation_node = self.tree.insert(
                     body_node, "end",
-                    text=f"☐ {self._format_situation(situation)}",
+                    text=f"{situation_status} {self._format_situation(situation)}",
                     values=(f"{situation_total:.1f}",),
                     open=False
                 )
@@ -132,12 +142,16 @@ class ExperimentTree(ttk.Frame):
                 for biome in sorted(body_groups[body][situation].keys()):
                     biome_exps = body_groups[body][situation][biome]
                     biome_total = sum(exp.available_science for exp in biome_exps)
+                    biome_completed = sum(1 for exp in biome_exps if exp.available_science <= 0.1)
 
                     # Only show biome level if biome exists
                     if biome != "No Biome":
+                        biome_status = self._get_category_status(
+                            biome_total, len(biome_exps), biome_completed
+                        )
                         biome_node = self.tree.insert(
                             situation_node, "end",
-                            text=f"☐ {biome}",
+                            text=f"{biome_status} {biome}",
                             values=(f"{biome_total:.1f}",),
                             open=False
                         )
@@ -147,7 +161,7 @@ class ExperimentTree(ttk.Frame):
 
                     # Add individual experiments
                     for exp in sorted(biome_exps, key=lambda e: e.experiment_name):
-                        status = "◐" if exp.is_partial else "☐"
+                        status = self._get_experiment_status(exp)
                         self.tree.insert(
                             parent, "end",
                             text=f"{status} {exp.experiment_name}",
@@ -169,30 +183,38 @@ class ExperimentTree(ttk.Frame):
 
         # Build tree
         for exp_name in sorted(exp_groups.keys()):
-            exp_total = sum(
-                exp.available_science
+            # Calculate totals for experiment level
+            all_exp_exps = [
+                exp
                 for body in exp_groups[exp_name].values()
                 for situation in body.values()
                 for exp in situation
-            )
+            ]
+            exp_total = sum(exp.available_science for exp in all_exp_exps)
+            exp_completed = sum(1 for exp in all_exp_exps if exp.available_science <= 0.1)
+            exp_status = self._get_category_status(exp_total, len(all_exp_exps), exp_completed)
 
             exp_node = self.tree.insert(
                 "", "end",
-                text=f"☐ {exp_name}",
+                text=f"{exp_status} {exp_name}",
                 values=(f"{exp_total:.1f}",),
                 open=False
             )
 
             for body in sorted(exp_groups[exp_name].keys()):
-                body_total = sum(
-                    exp.available_science
+                # Calculate totals for body level
+                all_body_exps = [
+                    exp
                     for situation in exp_groups[exp_name][body].values()
                     for exp in situation
-                )
+                ]
+                body_total = sum(exp.available_science for exp in all_body_exps)
+                body_completed = sum(1 for exp in all_body_exps if exp.available_science <= 0.1)
+                body_status = self._get_category_status(body_total, len(all_body_exps), body_completed)
 
                 body_node = self.tree.insert(
                     exp_node, "end",
-                    text=f"☐ {body}",
+                    text=f"{body_status} {body}",
                     values=(f"{body_total:.1f}",),
                     open=False
                 )
@@ -200,10 +222,14 @@ class ExperimentTree(ttk.Frame):
                 for situation in sorted(exp_groups[exp_name][body].keys()):
                     situation_exps = exp_groups[exp_name][body][situation]
                     situation_total = sum(exp.available_science for exp in situation_exps)
+                    situation_completed = sum(1 for exp in situation_exps if exp.available_science <= 0.1)
+                    situation_status = self._get_category_status(
+                        situation_total, len(situation_exps), situation_completed
+                    )
 
                     situation_node = self.tree.insert(
                         body_node, "end",
-                        text=f"☐ {self._format_situation(situation)}",
+                        text=f"{situation_status} {self._format_situation(situation)}",
                         values=(f"{situation_total:.1f}",),
                         open=False
                     )
@@ -211,7 +237,7 @@ class ExperimentTree(ttk.Frame):
                     # Add individual experiments (with biomes if applicable)
                     for exp in sorted(situation_exps, key=lambda e: e.experiment_id.biome or ""):
                         biome_str = f" - {exp.experiment_id.biome}" if exp.experiment_id.biome else ""
-                        status = "◐" if exp.is_partial else "☐"
+                        status = self._get_experiment_status(exp)
                         self.tree.insert(
                             situation_node, "end",
                             text=f"{status} {exp.body_name}{biome_str}",
@@ -233,30 +259,40 @@ class ExperimentTree(ttk.Frame):
 
         # Build tree
         for situation in sorted(situation_groups.keys()):
-            situation_total = sum(
-                exp.available_science
+            # Calculate totals for situation level
+            all_situation_exps = [
+                exp
                 for body in situation_groups[situation].values()
                 for biome in body.values()
                 for exp in biome
+            ]
+            situation_total = sum(exp.available_science for exp in all_situation_exps)
+            situation_completed = sum(1 for exp in all_situation_exps if exp.available_science <= 0.1)
+            situation_status = self._get_category_status(
+                situation_total, len(all_situation_exps), situation_completed
             )
 
             situation_node = self.tree.insert(
                 "", "end",
-                text=f"☐ {self._format_situation(situation)}",
+                text=f"{situation_status} {self._format_situation(situation)}",
                 values=(f"{situation_total:.1f}",),
                 open=False
             )
 
             for body in sorted(situation_groups[situation].keys()):
-                body_total = sum(
-                    exp.available_science
+                # Calculate totals for body level
+                all_body_exps = [
+                    exp
                     for biome in situation_groups[situation][body].values()
                     for exp in biome
-                )
+                ]
+                body_total = sum(exp.available_science for exp in all_body_exps)
+                body_completed = sum(1 for exp in all_body_exps if exp.available_science <= 0.1)
+                body_status = self._get_category_status(body_total, len(all_body_exps), body_completed)
 
                 body_node = self.tree.insert(
                     situation_node, "end",
-                    text=f"☐ {body}",
+                    text=f"{body_status} {body}",
                     values=(f"{body_total:.1f}",),
                     open=False
                 )
@@ -264,11 +300,15 @@ class ExperimentTree(ttk.Frame):
                 for biome in sorted(situation_groups[situation][body].keys()):
                     biome_exps = situation_groups[situation][body][biome]
                     biome_total = sum(exp.available_science for exp in biome_exps)
+                    biome_completed = sum(1 for exp in biome_exps if exp.available_science <= 0.1)
 
                     if biome != "No Biome":
+                        biome_status = self._get_category_status(
+                            biome_total, len(biome_exps), biome_completed
+                        )
                         biome_node = self.tree.insert(
                             body_node, "end",
-                            text=f"☐ {biome}",
+                            text=f"{biome_status} {biome}",
                             values=(f"{biome_total:.1f}",),
                             open=False
                         )
@@ -278,7 +318,7 @@ class ExperimentTree(ttk.Frame):
 
                     # Add individual experiments
                     for exp in sorted(biome_exps, key=lambda e: e.experiment_name):
-                        status = "◐" if exp.is_partial else "☐"
+                        status = self._get_experiment_status(exp)
                         self.tree.insert(
                             parent, "end",
                             text=f"{status} {exp.experiment_name}",
@@ -297,6 +337,26 @@ class ExperimentTree(ttk.Frame):
             'InSpaceHigh': 'Space (High)',
         }
         return situation_names.get(situation, situation)
+
+    def _get_experiment_status(self, exp: AvailableExperiment) -> str:
+        """Get status symbol for an experiment."""
+        if exp.available_science <= 0.1:  # Completed (account for floating point)
+            return "✓"
+        elif exp.is_partial:  # Partially completed
+            return "◐"
+        else:  # Not started
+            return "☐"
+
+    def _get_category_status(self, total_science: float, child_count: int, completed_count: int) -> str:
+        """Get status symbol for a category based on its children."""
+        if completed_count == child_count and child_count > 0:
+            return "✓"  # All children completed
+        elif total_science <= 0.1:
+            return "✓"  # No science remaining
+        elif completed_count > 0:
+            return "◐"  # Some children completed
+        else:
+            return "☐"  # None completed
 
     def clear(self):
         """Clear all items from the tree."""
